@@ -1,9 +1,9 @@
-import { Parallax, Reveal, ScrollSlide } from "./motion";
+import { Parallax, Reveal } from "./motion";
 import {
   TestimonialCarousel,
   type Testimonial,
 } from "./testimonial-carousel";
-import { Eyebrow, accentClass, bodyClass, headlineClass } from "./ui";
+import { Eyebrow, bodyClass } from "./ui";
 
 // Sample reviews for the design. Replace with real customer feedback
 // (with permission) before launch.
@@ -88,20 +88,10 @@ export function Testimonials() {
       <div className="relative py-24 md:py-36">
         <div className="mx-auto flex max-w-[1400px] flex-col items-center px-5 text-center md:px-10">
           <Reveal>
-            <Eyebrow>Travellers Say</Eyebrow>
+            <Eyebrow className="!text-xl !font-semibold !tracking-[0.4em] md:!text-3xl md:!tracking-[0.45em]">Travellers Say</Eyebrow>
           </Reveal>
 
-          <h2
-            id="testimonials-title"
-            className={`mt-7 text-[clamp(2.75rem,10vw,3.75rem)] md:text-[clamp(3.25rem,6vw,5.5rem)] ${headlineClass}`}
-          >
-            <ScrollSlide from={-10} className="block">
-              They came back
-            </ScrollSlide>
-            <ScrollSlide from={10} className="block">
-              with <span className={accentClass}>stories</span>
-            </ScrollSlide>
-          </h2>
+          <h2 id="testimonials-title" className="sr-only">They came back with stories</h2>
 
           <Reveal className="mt-8">
             <p

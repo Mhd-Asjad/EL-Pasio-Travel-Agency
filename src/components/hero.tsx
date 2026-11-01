@@ -153,7 +153,7 @@ export function Hero() {
             <ButtonLink href="#inquiry" arrow>
               Plan My Trip
             </ButtonLink>
-            <ButtonLink href="#packages" variant="ghost">
+            <ButtonLink href="#destinations" variant="ghost">
               Explore Destinations
             </ButtonLink>
           </motion.div>

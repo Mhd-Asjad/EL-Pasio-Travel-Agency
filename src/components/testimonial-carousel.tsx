@@ -146,9 +146,9 @@ export function TestimonialCarousel({ items }: { items: Testimonial[] }) {
               transition={
                 reduce || abs >= 3 ? { duration: 0 } : { ...SPRING, opacity: { duration: 0.35 } }
               }
-              className={`col-start-1 row-start-1 flex flex-col rounded-[1.6rem] bg-cream p-7 text-navy-950 md:p-9 ${
+              className={`col-start-1 row-start-1 flex flex-col rounded-[0.5rem] bg-cream p-7 text-navy-950 md:p-9 ${
                 isActive ? "" : "cursor-pointer"
-              } shadow-[0_2px_4px_oklch(0.2_0.055_258/0.06),0_18px_32px_-14px_oklch(0.05_0.04_258/0.55),0_50px_90px_-36px_oklch(0.05_0.04_258/0.85)]`}
+              } `}
               style={{
                 width: cardWidth,
                 zIndex: isActive ? 10 : 5 - abs,

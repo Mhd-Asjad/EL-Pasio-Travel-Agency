@@ -1,5 +1,5 @@
-import { Parallax, Reveal, ScrollSlide } from "./motion";
-import { ButtonLink, Eyebrow, accentClass, bodyClass, headlineClass } from "./ui";
+import { Parallax, Reveal } from "./motion";
+import { ButtonLink, Eyebrow, bodyClass } from "./ui";
 
 // Approved copy from doc/prd.md section 7.1. Use exactly as written.
 // Split only so the motto can be styled; joined, it is the original text.
@@ -33,20 +33,10 @@ export function About() {
 
       <div className="relative mx-auto flex max-w-[1400px] flex-col items-center px-5 py-24 text-center md:px-10 md:py-36">
         <Reveal>
-          <Eyebrow>About Us</Eyebrow>
+          <Eyebrow className="!text-xl !font-semibold !tracking-[0.4em] md:!text-3xl md:!tracking-[0.45em]">About Us</Eyebrow>
         </Reveal>
 
-        <h2
-          id="about-title"
-          className={`mt-7 text-[clamp(3rem,13vw,3.75rem)] md:text-[clamp(3.75rem,7.4vw,6.5rem)] ${headlineClass}`}
-        >
-          <ScrollSlide from={-12} className="block">
-            Journey <span className={accentClass}>Beyond</span>
-          </ScrollSlide>
-          <ScrollSlide from={12} className="block">
-            Destinations
-          </ScrollSlide>
-        </h2>
+        <h2 id="about-title" className="sr-only">Journey Beyond Destinations</h2>
 
         <Reveal className="mt-10 md:mt-12">
           <p

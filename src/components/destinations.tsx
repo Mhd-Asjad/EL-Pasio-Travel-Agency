@@ -1,7 +1,7 @@
 import { whatsappUrl } from "@/lib/contact";
 import { CardSpread, type SpreadCard } from "./card-spread";
-import { Parallax, Reveal, ScrollSlide } from "./motion";
-import { ButtonLink, Eyebrow, accentClass, bodyClass, headlineClass } from "./ui";
+import { Parallax, Reveal } from "./motion";
+import { ButtonLink, Eyebrow, bodyClass } from "./ui";
 
 // Centre card is the hero destination: Kerala is home turf.
 const RAW_CARDS: SpreadCard[] = [
@@ -63,7 +63,7 @@ const CARDS: SpreadCard[] = RAW_CARDS.map((c) => ({
 export function Destinations() {
   return (
     <section
-      id="packages"
+      id="destinations"
       aria-labelledby="destinations-title"
       className="relative isolate overflow-hidden border-t border-cream/10 bg-navy-950 text-cream"
     >
@@ -77,20 +77,10 @@ export function Destinations() {
 
       <div className="relative mx-auto flex max-w-[1400px] flex-col items-center px-5 py-24 text-center md:px-10 md:py-36">
         <Reveal>
-          <Eyebrow>Destinations</Eyebrow>
+          <Eyebrow className="!text-xl !font-semibold !tracking-[0.4em] md:!text-3xl md:!tracking-[0.45em]">Destinations</Eyebrow>
         </Reveal>
 
-        <h2
-          id="destinations-title"
-          className={`mt-7 text-[clamp(2.75rem,10vw,3.75rem)] md:text-[clamp(3.25rem,6vw,5.5rem)] ${headlineClass}`}
-        >
-          <ScrollSlide from={-10} className="block">
-            Places worth
-          </ScrollSlide>
-          <ScrollSlide from={10} className="block">
-            getting <span className={accentClass}>lost</span> in
-          </ScrollSlide>
-        </h2>
+        <h2 id="destinations-title" className="sr-only">Places worth getting lost in</h2>
 
         <Reveal className="mt-8">
           <p

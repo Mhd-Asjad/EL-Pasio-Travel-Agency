@@ -200,7 +200,7 @@ export function CardSpread({
               }}
               data-active={isActive}
               data-label={showLabel}
-              className="group absolute rounded-[1.3rem] bg-cream p-[3px] shadow-[0_32px_60px_-26px_oklch(0.1_0.05_258/0.9)] will-change-transform"
+              className="group absolute rounded-[0.5rem] bg-cream p-[3px] will-change-transform"
               style={{
                 width: L.cardWidth,
                 height: L.cardHeight,
@@ -217,7 +217,7 @@ export function CardSpread({
                 aria-label={`Plan a trip to ${card.title}, ${card.region}`}
                 onFocus={() => setActive(i)}
                 onClick={(e) => onCardClick(e, i)}
-                className="relative block size-full overflow-hidden rounded-[1.1rem] bg-navy-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-300"
+                className="relative block size-full overflow-hidden rounded-[0.375rem] bg-navy-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-300"
               >
                 <Image
                   src={card.src}
