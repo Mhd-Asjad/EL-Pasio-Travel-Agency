@@ -85,7 +85,7 @@ export function Testimonials() {
         <div className="absolute left-1/2 top-[55%] h-[22rem] w-[36rem] max-w-none -translate-x-1/2 bg-[radial-gradient(closest-side,oklch(0.73_0.125_80/0.08),transparent)]" />
       </Parallax>
 
-      <div className="relative py-24 md:py-36">
+      <div className="relative py-14 md:py-16">
         <div className="mx-auto flex max-w-[1400px] flex-col items-center px-5 text-center md:px-10">
           <Reveal>
             <Eyebrow className="!text-xl !font-semibold !tracking-[0.4em] md:!text-3xl md:!tracking-[0.45em]">Travellers Say</Eyebrow>

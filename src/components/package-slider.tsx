@@ -110,7 +110,7 @@ function StickySlider({ packages }: { packages: TravelPackage[] }) {
       {/* `cqw` units below are relative to this stage. --W is the card width. */}
       <div
         style={{ "--W": "calc(100cqw - 2 * var(--pad))" } as React.CSSProperties}
-        className="sticky top-0 h-svh overflow-hidden bg-navy-950 [--pad:0px] [--gap:0.75rem] [--sw:13cqw] [container-type:inline-size] md:[--gap:1.5rem] md:[--sw:11cqw]"
+        className="sticky top-0 h-svh overflow-hidden bg-navy-950 [--pad:0px] [--gap:0px] [--sw:0px] [container-type:inline-size] md:[--gap:1.5rem] md:[--sw:11cqw]"
       >
         {packages.map((pkg, i) => (
           <Panel
@@ -348,7 +348,7 @@ function StackedPackages({ packages }: { packages: TravelPackage[] }) {
             key={pkg.id}
             aria-label={`${pkg.lead} ${pkg.accent}`}
             style={{ backgroundColor: pkg.bg }}
-            className={`rounded-[0.5rem] px-5 py-14 md:px-10 md:py-20 ${tone.text}`}
+            className={`px-5 py-14 md:px-10 md:py-20 ${tone.text}`}
           >
             <div className="mx-auto grid max-w-[1400px] gap-8 md:grid-cols-2 md:items-center md:gap-14">
               <div>
@@ -374,7 +374,7 @@ function StackedPackages({ packages }: { packages: TravelPackage[] }) {
                     variant={pkg.tone === "dark" ? "primary" : "ghost"}
                     tone={pkg.tone === "dark" ? "dark" : "light"}
                   >
-                    Plan this trip
+                    Explore this package
                   </ButtonLink>
                 </div>
               </div>

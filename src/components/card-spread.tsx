@@ -52,13 +52,13 @@ const DESKTOP: Layout = {
 };
 
 const COMPACT: Layout = {
-  cardWidth: 196,
-  cardHeight: 272,
-  spacing: 56,
+  cardWidth: 210,
+  cardHeight: 290,
+  spacing: 40,
   tilt: 5,
   drop: 8,
   lift: 22,
-  push: 54,
+  push: 40,
 };
 
 /** How many neighbours on each side react, with fading strength. */
@@ -108,7 +108,12 @@ export function CardSpread({
   const sway = Math.sin((mid * L.tilt * Math.PI) / 180) * L.cardHeight * 0.5;
   const fanWidth = (n - 1) * L.spacing + L.cardWidth + 2 * (sway + L.push);
   const fanHeight = L.cardHeight + mid * mid * L.drop + L.lift + 28;
-  const scale = Math.min(1, width / fanWidth);
+  // On phones, fit the fan at rest (not the extra room for the hover push)
+  // and let the outer cards bleed 10px into the page padding, so the cards
+  // render as large as possible instead of shrinking to fit the push.
+  const restWidth = (n - 1) * L.spacing + L.cardWidth + 2 * sway;
+  const fitWidth = width < 640 ? restWidth - 20 : fanWidth;
+  const scale = Math.min(1, width / fitWidth);
 
   function targetFor(i: number) {
     const k = i - mid;

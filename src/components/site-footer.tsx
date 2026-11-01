@@ -6,6 +6,7 @@ import {
 } from "@/lib/contact";
 import { LogoBadge, Wordmark } from "./brand-mark";
 import { PhoneIcon, WhatsAppIcon } from "./icons";
+import { FooterWatermark } from "./footer-watermark";
 import { Reveal } from "./motion";
 import { ButtonLink, focusRingLight } from "./ui";
 
@@ -174,14 +175,7 @@ export function SiteFooter() {
       </div>
 
       {/* Brand wordmark: huge, cropped by the bottom edge */}
-      <Reveal y={32} margin="0%">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none mt-10 h-[0.74em] select-none overflow-hidden whitespace-nowrap text-center pl-[0.03em] text-[18vw] font-semibold uppercase leading-[0.9] tracking-[0.03em] text-navy-950 md:mt-16"
-        >
-          EL PASEO
-        </div>
-      </Reveal>
+      <FooterWatermark />
     </footer>
   );
 }
