@@ -189,13 +189,13 @@ function Panel({
       // Off-screen panels must not be focusable.
       inert={inactive}
       style={style}
-      className={`absolute bottom-[var(--pad)] left-[var(--pad)] top-[var(--pad)] overflow-hidden rounded-[0.5rem] will-change-transform [--fh0:26%] [--fh1:34%] [--fw:0.9] [--ib:5.25rem] md:[--fh0:34%] md:[--fh1:62%] md:[--fw:0.44] md:[--ib:5.75rem] ${tone.text}`}
+      className={`absolute bottom-[var(--pad)] left-[var(--pad)] top-[var(--pad)] overflow-hidden will-change-transform [--fh0:26%] [--fh1:34%] [--fw:0.9] [--ib:5.25rem] md:[--fh0:34%] md:[--fh1:62%] md:[--fw:0.44] md:[--ib:5.75rem] ${tone.text}`}
     >
       {/* Content box: the part of the panel left uncovered by later strips. */}
       <div className="absolute inset-y-0 left-0" style={{ width: "var(--box)" }}>
         {/* Photo: a strip-wide thumbnail that grows to its full size. */}
         <div
-          className="absolute overflow-hidden rounded-[0.375rem] bg-navy-900"
+          className="absolute overflow-hidden bg-navy-900"
           style={{
             bottom: "var(--ib)",
             left: "calc((var(--box) - var(--box) * var(--fw)) * var(--p))",
