@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { LogoBadge, Wordmark } from "./brand-mark";
 import { CloseIcon, MenuIcon, PhoneIcon } from "./icons";
 import { focusRing } from "./ui";
@@ -32,7 +33,7 @@ export function SiteHeader() {
   }, [open]);
 
   return (
-    <header className="absolute inset-x-0 top-0 z-30">
+    <header className="absolute inset-x-0 top-0 z-50">
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-5 py-5 md:px-10 md:py-7">
         <a
           href="#home"
@@ -75,31 +76,35 @@ export function SiteHeader() {
         </button>
       </div>
 
-      <div
-        id="mobile-menu"
-        hidden={!open}
-        className="fixed inset-0 z-30 flex min-h-[100dvh] flex-col justify-between bg-navy-950/96 px-5 pb-10 pt-28 backdrop-blur-md lg:hidden"
-      >
-        <nav aria-label="Mobile" className="flex flex-col">
-          {NAV.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              onClick={() => setOpen(false)}
-              className={`border-b border-cream/10 py-4 font-display text-4xl italic text-cream ${focusRing}`}
+      {open
+        ? createPortal(
+            <div
+              id="mobile-menu"
+              className="fixed inset-0 z-40 flex min-h-[100dvh] flex-col justify-between bg-navy-950/96 px-5 pb-10 pt-28 backdrop-blur-md lg:hidden"
             >
-              {item.label}
-            </a>
-          ))}
-        </nav>
-        <a
-          href={`tel:${CONTACT.phoneTel}`}
-          className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gold-400 px-6 text-sm font-semibold tracking-wide text-navy-950 ${focusRing}`}
-        >
-          <PhoneIcon className="size-4" />
-          Call {CONTACT.phoneDisplay}
-        </a>
-      </div>
+              <nav aria-label="Mobile" className="flex flex-col">
+                {NAV.map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className={`border-b border-cream/10 py-4 font-display text-4xl italic text-cream ${focusRing}`}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </nav>
+              <a
+                href={`tel:${CONTACT.phoneTel}`}
+                className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gold-400 px-6 text-sm font-semibold tracking-wide text-navy-950 ${focusRing}`}
+              >
+                <PhoneIcon className="size-4" />
+                Call {CONTACT.phoneDisplay}
+              </a>
+            </div>,
+            document.body,
+          )
+        : null}
     </header>
   );
 }

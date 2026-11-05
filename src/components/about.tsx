@@ -1,5 +1,5 @@
 import { Parallax, Reveal } from "./motion";
-import { ButtonLink, Eyebrow, bodyClass } from "./ui";
+import { Eyebrow, bodyClass } from "./ui";
 
 // Approved copy from doc/prd.md section 7.1. Use exactly as written.
 // Split only so the motto can be styled; joined, it is the original text.
@@ -31,7 +31,7 @@ export function About() {
         <div className="absolute left-1/2 top-[30%] h-[22rem] w-[30rem] max-w-none -translate-x-1/2 bg-[radial-gradient(closest-side,oklch(0.73_0.125_80/0.1),transparent)]" />
       </Parallax>
 
-      <div className="relative mx-auto flex max-w-[1400px] flex-col items-center px-5 py-14 text-center md:px-10 md:py-14">
+      <div className="relative mx-auto flex max-w-[1400px] flex-col items-center px-5 py-8 text-center md:px-10 md:py-14">
         <Reveal>
           <Eyebrow className="!text-xl !font-semibold !tracking-[0.4em] md:!text-3xl md:!tracking-[0.45em]">About Us</Eyebrow>
         </Reveal>
@@ -64,12 +64,6 @@ export function About() {
             </li>
           ))}
         </ul>
-
-        <Reveal className="mt-14 md:mt-16">
-          <ButtonLink href="#inquiry" arrow>
-            Plan Your Trip
-          </ButtonLink>
-        </Reveal>
       </div>
     </section>
   );

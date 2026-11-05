@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { ArrowRightIcon } from "./icons";
 
 /**
@@ -37,10 +37,57 @@ export function Eyebrow({
 }
 
 const buttonBase =
-  "group inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full px-8 text-sm tracking-[0.04em] transition-[transform,background-color,border-color] duration-500 ease-spring active:scale-[0.97]";
+  "group inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full px-8 text-sm tracking-[0.04em] transition-[transform,background-color,border-color] duration-500 ease-spring active:scale-[0.97] disabled:pointer-events-none disabled:opacity-50";
 
 export const focusRingLight =
   "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-600";
+
+type ButtonTone = "dark" | "light";
+type ButtonVariant = "primary" | "ghost";
+
+export function buttonClass({
+  variant = "primary",
+  tone = "dark",
+}: {
+  variant?: ButtonVariant;
+  tone?: ButtonTone;
+} = {}) {
+  const styles =
+    tone === "light"
+      ? variant === "primary"
+        ? "bg-navy-950 font-semibold text-cream shadow-[0_12px_32px_-14px_oklch(0.2_0.055_258/0.7)] hover:bg-navy-700"
+        : "border border-navy-950/30 bg-transparent font-medium text-navy-950 hover:border-navy-950 hover:bg-navy-950/5"
+      : variant === "primary"
+        ? "bg-gold-400 font-semibold text-navy-950 shadow-[0_12px_40px_-12px_oklch(0.73_0.125_80/0.7)] hover:bg-gold-300"
+        : "border border-cream/55 bg-cream/5 font-medium text-cream backdrop-blur-sm hover:border-cream hover:bg-cream/15";
+  const ring = tone === "light" ? focusRingLight : focusRing;
+  return `${buttonBase} ${styles} ${ring}`;
+}
+
+export function Button({
+  variant = "primary",
+  tone = "dark",
+  arrow = false,
+  icon,
+  className = "",
+  children,
+  ...props
+}: ButtonHTMLAttributes<HTMLButtonElement> & {
+  variant?: ButtonVariant;
+  tone?: ButtonTone;
+  arrow?: boolean;
+  icon?: ReactNode;
+}) {
+  return (
+    <button className={`${buttonClass({ variant, tone })} ${className}`} {...props}>
+      {icon}
+      {children}
+      {arrow && (
+        <ArrowRightIcon className="size-4 transition-transform duration-500 ease-spring group-hover:translate-x-1" />
+      )}
+    </button>
+  );
+}
 
 export function ButtonLink({
   href,
@@ -53,9 +100,9 @@ export function ButtonLink({
   children,
 }: {
   href: string;
-  variant?: "primary" | "ghost";
+  variant?: ButtonVariant;
   /** "light" is for cream backgrounds (footer). */
-  tone?: "dark" | "light";
+  tone?: ButtonTone;
   arrow?: boolean;
   /** Optional leading icon. */
   icon?: ReactNode;
@@ -64,21 +111,11 @@ export function ButtonLink({
   className?: string;
   children: ReactNode;
 }) {
-  const styles =
-    tone === "light"
-      ? variant === "primary"
-        ? "bg-navy-950 font-semibold text-cream shadow-[0_12px_32px_-14px_oklch(0.2_0.055_258/0.7)] hover:bg-navy-700"
-        : "border border-navy-950/30 bg-transparent font-medium text-navy-950 hover:border-navy-950 hover:bg-navy-950/5"
-      : variant === "primary"
-        ? "bg-gold-400 font-semibold text-navy-950 shadow-[0_12px_40px_-12px_oklch(0.73_0.125_80/0.7)] hover:bg-gold-300"
-        : "border border-cream/55 bg-cream/5 font-medium text-cream backdrop-blur-sm hover:border-cream hover:bg-cream/15";
-  const ring = tone === "light" ? focusRingLight : focusRing;
-
   return (
     <a
       href={href}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-      className={`${buttonBase} ${styles} ${ring} ${className}`}
+      className={`${buttonClass({ variant, tone })} ${className}`}
     >
       {icon}
       {children}

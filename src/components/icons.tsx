@@ -20,6 +20,15 @@ export function PhoneIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+export function ScrollIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <rect x="8" y="3" width="8" height="13" rx="4" />
+      <path d="M12 6.5v2.5" />
+    </svg>
+  );
+}
+
 export function ArrowRightIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg {...base} {...props}>
@@ -85,6 +94,67 @@ export function MapPinIcon(props: SVGProps<SVGSVGElement>) {
     <svg {...base} {...props}>
       <path d="M12 21s-6.500-5.700-6.500-11A6.500 6.500 0 0 1 18.500 10c0 5.300-6.500 11-6.500 11Z" />
       <circle cx="12" cy="10" r="2.300" />
+    </svg>
+  );
+}
+
+export function SuitcaseIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <rect x="3.5" y="8" width="17" height="12" rx="2" />
+      <path d="M9 8V6.2A1.2 1.2 0 0 1 10.2 5h3.6A1.2 1.2 0 0 1 15 6.2V8" />
+    </svg>
+  );
+}
+
+export function HotelIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M4 20V7.2A1.2 1.2 0 0 1 5.2 6h13.6A1.2 1.2 0 0 1 20 7.2V20" />
+      <path d="M3 20h18" />
+      <path d="M10 20v-4.5h4V20" />
+      <path d="M8 10h.8M12 10h.8M16 10h.8M8 13.5h.8M12 13.5h.8M16 13.5h.8" />
+    </svg>
+  );
+}
+
+export function PlaneIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M21 12 3.5 5.2l2.2 6.8-2.2 6.8L21 12Z" />
+      <path d="M10.2 12H21" />
+    </svg>
+  );
+}
+
+export function TrainIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <rect x="5" y="3.5" width="14" height="13" rx="2.2" />
+      <path d="M5 11.5h14" />
+      <circle cx="8.5" cy="17.8" r="1.2" />
+      <circle cx="15.5" cy="17.8" r="1.2" />
+      <path d="M8 20.5h8" />
+    </svg>
+  );
+}
+
+export function BusIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <rect x="3.5" y="5" width="17" height="11" rx="2.2" />
+      <path d="M3.5 11h17" />
+      <path d="M7 16v2.5M17 16v2.5" />
+      <path d="M7 20.5h2.5M14.5 20.5H17" />
+    </svg>
+  );
+}
+
+export function CompassIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <circle cx="12" cy="12" r="8" />
+      <path d="m15 9-1.4 4.2L9.4 14.6 10.8 10.4 15 9Z" />
     </svg>
   );
 }

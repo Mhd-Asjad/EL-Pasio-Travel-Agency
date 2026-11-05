@@ -76,9 +76,6 @@ export function SiteFooter() {
       aria-labelledby="footer-title"
       className="relative z-10 overflow-hidden bg-[oklch(0.94_0.018_86)] text-navy-950"
     >
-      {/* Target for every "Plan My Trip" button until a full form exists */}
-      <span id="inquiry" aria-hidden="true" className="absolute top-0" />
-
       <div className="mx-auto max-w-[1400px] px-5 pt-24 md:px-10 md:pt-40">
         {/* Call to action */}
         <div className="flex flex-col items-center text-center">

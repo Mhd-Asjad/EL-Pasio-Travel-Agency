@@ -112,7 +112,7 @@ export function Packages() {
       aria-labelledby="packages-title"
       className="relative bg-navy-950 text-cream"
     >
-      <div className="mx-auto flex max-w-[1400px] flex-col items-center px-5 pb-12 pt-24 text-center md:px-10 md:pb-16 md:pt-16">
+      <div className="mx-auto flex max-w-[1400px] flex-col items-center px-5 pb-12 pt-10 text-center md:px-10 md:pb-16 md:pt-16">
         <Reveal>
           <Eyebrow className="!text-xl !font-semibold !tracking-[0.4em] md:!text-3xl md:!tracking-[0.45em]">Travel Packages</Eyebrow>
         </Reveal>
