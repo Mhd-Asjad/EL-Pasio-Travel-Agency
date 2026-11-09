@@ -97,17 +97,6 @@ export function Hero() {
           Explore, Dream, Discover
         </motion.h1>
 
-        {/* Architectural Gold Underline */}
-        <motion.div
-          variants={item}
-          aria-hidden="true"
-          className="mx-auto mt-6 flex items-center justify-center gap-2"
-        >
-          <div className="h-px w-12 bg-gradient-to-r from-transparent to-gold-400/60" />
-          <div className="size-1.5 rounded-full bg-gold-400 shadow-[0_0_8px_rgba(242,207,120,0.6)]" />
-          <div className="h-px w-12 bg-gradient-to-l from-transparent to-gold-400/60" />
-        </motion.div>
-
         <motion.p
           variants={item}
           className={`mx-auto mt-6 max-w-[46ch] text-pretty text-[1rem] leading-relaxed md:mt-8 md:text-[1.2rem] ${bodyClass}`}

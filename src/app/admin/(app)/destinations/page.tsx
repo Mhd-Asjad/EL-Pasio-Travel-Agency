@@ -16,14 +16,14 @@ export default async function DestinationsPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-8">
+      <div className="mb-6 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-cream tracking-tight">Destinations</h1>
-          <p className="mt-1 text-cream/50 text-sm">{destinations.length} destination{destinations.length !== 1 ? 's' : ''}</p>
+          <h1 className="text-xl font-semibold tracking-tight text-cream sm:text-2xl">Destinations</h1>
+          <p className="mt-1 text-sm text-cream/50">{destinations.length} destination{destinations.length !== 1 ? 's' : ''}</p>
         </div>
         <Link
           href="/admin/destinations/new"
-          className="inline-flex items-center gap-1.5 bg-gold-400 text-navy-950 font-semibold rounded-full px-5 py-2.5 hover:bg-gold-300 transition-colors text-sm"
+          className="inline-flex min-h-11 items-center justify-center gap-1.5 self-start rounded-full bg-gold-400 px-5 py-2.5 text-sm font-semibold text-navy-950 transition-colors hover:bg-gold-300"
         >
           <Plus className="size-4" />
           <span>Add Destination</span>
@@ -39,16 +39,16 @@ export default async function DestinationsPage() {
           </Link>
         </div>
       ) : (
-        <div className="bg-navy-900 rounded-xl border border-cream/10 overflow-hidden">
-          <table className="w-full text-sm">
+        <div className="-mx-4 overflow-x-auto overscroll-x-contain sm:mx-0 sm:overflow-hidden sm:rounded-xl sm:border sm:border-cream/10 sm:bg-navy-900">
+          <table className="w-full min-w-[32rem] text-sm sm:min-w-0">
             <thead>
               <tr className="border-b border-cream/10">
-                <th className="text-left text-cream/40 font-medium px-6 py-3 text-xs uppercase tracking-widest">Image</th>
-                <th className="text-left text-cream/40 font-medium px-4 py-3 text-xs uppercase tracking-widest">Title</th>
-                <th className="text-left text-cream/40 font-medium px-4 py-3 text-xs uppercase tracking-widest hidden sm:table-cell">Region</th>
-                <th className="text-left text-cream/40 font-medium px-4 py-3 text-xs uppercase tracking-widest hidden lg:table-cell">Category</th>
-                <th className="text-left text-cream/40 font-medium px-4 py-3 text-xs uppercase tracking-widest hidden md:table-cell">Packages</th>
-                <th className="text-right text-cream/40 font-medium px-6 py-3 text-xs uppercase tracking-widest">Actions</th>
+                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-widest text-cream/40 sm:px-6">Image</th>
+                <th className="px-3 py-3 text-left text-xs font-medium uppercase tracking-widest text-cream/40 sm:px-4">Title</th>
+                <th className="hidden px-4 py-3 text-left text-xs font-medium uppercase tracking-widest text-cream/40 sm:table-cell">Region</th>
+                <th className="hidden px-4 py-3 text-left text-xs font-medium uppercase tracking-widest text-cream/40 lg:table-cell">Category</th>
+                <th className="hidden px-4 py-3 text-left text-xs font-medium uppercase tracking-widest text-cream/40 md:table-cell">Packages</th>
+                <th className="px-4 py-3 text-right text-xs font-medium uppercase tracking-widest text-cream/40 sm:px-6">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-cream/5">

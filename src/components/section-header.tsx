@@ -30,18 +30,8 @@ export function SectionHeader({
         {title}
       </h2>
 
-      {/* Elegant Architectural Gold Underline */}
-      <div
-        aria-hidden="true"
-        className="mx-auto mt-4 flex items-center justify-center gap-2"
-      >
-        <div className="h-px w-10 bg-gradient-to-r from-transparent to-gold-400/60" />
-        <div className="size-1.5 rounded-full bg-gold-400 shadow-[0_0_8px_rgba(242,207,120,0.6)]" />
-        <div className="h-px w-10 bg-gradient-to-l from-transparent to-gold-400/60" />
-      </div>
-
       {description && (
-        <div className="mx-auto mt-4 max-w-[54ch] text-pretty text-[1rem] font-normal leading-[1.8] text-cream/70 md:text-[1.12rem]">
+        <div className="mx-auto mt-5 max-w-[54ch] text-pretty text-[1rem] font-normal leading-[1.8] text-cream/70 md:text-[1.12rem]">
           {description}
         </div>
       )}

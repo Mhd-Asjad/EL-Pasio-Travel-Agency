@@ -35,11 +35,11 @@ const NAV_LINKS = [
   },
 ];
 
-export function AdminNav() {
+export function AdminNav({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
 
   return (
-    <nav className="flex-1 px-3 py-4 space-y-1">
+    <nav className="flex-1 space-y-1 px-3 py-4">
       {NAV_LINKS.map((link) => {
         const isActive =
           link.href === '/admin'
@@ -51,11 +51,12 @@ export function AdminNav() {
           <Link
             key={link.href}
             href={link.href}
+            onClick={onNavigate}
             className={cn(
-              'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
+              'flex min-h-11 items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
               isActive
-                ? 'bg-gold-400/10 text-gold-400 border-l-2 border-gold-400 pl-[10px]'
-                : 'text-cream/60 hover:text-cream hover:bg-cream/5'
+                ? 'border-l-2 border-gold-400 bg-gold-400/10 pl-[10px] text-gold-400'
+                : 'text-cream/60 hover:bg-cream/5 hover:text-cream'
             )}
           >
             <Icon
@@ -72,7 +73,7 @@ export function AdminNav() {
       <form action={logoutAdmin} className="pt-6">
         <button
           type="submit"
-          className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-cream/60 transition-colors hover:bg-cream/5 hover:text-cream cursor-pointer"
+          className="flex min-h-11 w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-cream/60 transition-colors hover:bg-cream/5 hover:text-cream"
         >
           <LogOut className="size-4 shrink-0 text-cream/40" />
           Sign out

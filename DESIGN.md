@@ -52,7 +52,7 @@ No pure black or white. Shadows are navy/gold tinted. Final hex values should st
 
 - Hero and About are both full-bleed navy. The hero photo carries the top of the page.
 - Light (cream) sections are reserved for later contrast (Services/Packages); on cream use `gold-600` for gold text and `navy-950` buttons.
-- Section recipe: gold stem or eyebrow, light headline with ONE italic serif gold word, body in `cream/85`, gold primary CTA.
+- Section recipe: gold eyebrow, light headline with ONE italic serif gold word, body in `cream/85`, gold primary CTA. No gold line-and-dot underline under headlines.
 
 ## Motion (Framer Motion, `framer-motion` ^14)
 
@@ -67,7 +67,9 @@ No pure black or white. Shadows are navy/gold tinted. Final hex values should st
 - `src/components/site-header.tsx` (client: mobile menu state only)
 - `src/components/brand-mark.tsx` (`LogoBadge`: real logo `public/images/logo.png` on a cream disc, `Wordmark`). The logo has navy lettering and mountains, so it must always sit on cream, never directly on navy.
 - `src/components/about.tsx` (navy, fully centered, no imagery, no trip button; mobile vertical padding is `py-8`, desktop stays `py-14`; server component using the motion primitives; copy is the exact PRD 7.1 text with the motto in gold serif italic)
-- `src/components/destinations.tsx` (id `#packages`; navy; same eyebrow/headline recipe; "Places worth getting *lost* in")
+- `src/components/admin/admin-shell.tsx` (client; admin chrome. Desktop: fixed sidebar. Mobile: sticky top bar + slide-over drawer so content stays full-width.)
+- `src/components/destinations.tsx` (id `#destinations`; navy; category rails for browsing places)
+- `src/components/category-destinations.tsx` (client; segmented 3-slot category control — no sideways scroll; selecting the end slot auto-advances the window to reveal the next tabs. Destination cards: full-bleed photo + frosted glass caption with title, blurb, Explore pill. Cards stay a horizontal snap rail; desktop arrows step one card.)
 - `src/components/card-spread.tsx` (client; fanned deck: fans out on scroll-in, hovered card lifts and straightens, neighbours push aside with falloff, captions only on active/centre card; tap-to-open then tap-to-follow on touch; 192px spacing desktop, 56px compact below 640px; whole fan scales to fit). Local stand-in for React Bits Pro "Card Spread".
 - `src/components/testimonials.tsx` (id `#testimonials`; navy; header recipe; holds the sample review data)
 - `src/components/testimonial-carousel.tsx` (client; centred cream card, neighbours lightly blurred (2.5px) + tilted with perspective; shadcn `Avatar` with illustrated profile pictures from `public/images/avatars/` and initials fallback; compact 36px arrow buttons with a 48px hit area; spring-driven; drag/swipe, arrows, dots, ArrowLeft/Right, autoplay 7s that pauses on hover/focus/touch and is off for reduced motion; circular, shortest-path offsets)
@@ -79,6 +81,7 @@ No pure black or white. Shadows are navy/gold tinted. Final hex values should st
 - `src/components/ui.tsx` (shared `Eyebrow`, `Button`, `ButtonLink`, `buttonClass`, `headlineClass`, `accentClass`, `bodyClass`, `focusRing`; every section must use these, never re-declare)
 - `src/components/motion.tsx` (client: `Reveal`, `ScrollSlide`, `Parallax`, `GrowLine`, shared `EASE`)
 - `src/components/hero.tsx` (client; full-bleed photo, header, search card, scroll icon, service ticker)
+- `src/components/packages.tsx` / `package-slider.tsx` (normal stacked package bands, no sticky scroll hijack. Even rows: photo left / text right. Odd rows flip. Easy to browse and click through.)
 - `src/components/icons.tsx` (inline SVG, 1.5 stroke; booking set: suitcase, hotel, plane, train, bus, compass)
 
 ## Open items
@@ -92,4 +95,4 @@ No pure black or white. Shadows are navy/gold tinted. Final hex values should st
 - Hero photo is a 1280x720 generated placeholder at `public/images/hero-mountain-lake.jpg`; swap in a real 2400px+ photo (Kerala hills, backwaters, or beach) for production.
 - Hero inquiry submits to WhatsApp (no backend yet). A second, longer inquiry section is still on the PRD backlog.
 
-Last updated: 2026-11-05 (hero title is one line: Explore, Dream, Discover)
+Last updated: 2026-11-09 (destinations: glass cards + 3-slot auto-advancing tabs)

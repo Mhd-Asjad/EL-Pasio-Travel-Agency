@@ -34,7 +34,7 @@ export async function Destinations() {
         <div className="absolute left-1/2 top-[55%] h-[24rem] w-[40rem] max-w-none -translate-x-1/2 bg-[radial-gradient(closest-side,oklch(0.73_0.125_80/0.09),transparent)]" />
       </Parallax>
 
-      <div className="relative mx-auto max-w-[1400px] px-5 py-20 text-center md:px-10 md:py-28">
+      <div className="relative mx-auto max-w-[1400px] px-5 py-14 text-center md:px-10 md:py-28">
         <Reveal>
           <SectionHeader
             eyebrow="Destinations"
@@ -44,7 +44,7 @@ export async function Destinations() {
           />
         </Reveal>
 
-        <div className="mt-12 md:mt-16">
+        <div className="mt-8 md:mt-16">
           <CategoryDestinations categories={categories} destinations={items} />
         </div>
       </div>

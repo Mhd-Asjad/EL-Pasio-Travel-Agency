@@ -53,7 +53,7 @@ export async function Packages() {
             eyebrow="Travel Packages"
             title="Journeys Made to Measure"
             id="packages-title"
-            description="Keep scrolling to travel through our featured packages. Every journey is tailored to your dates, budget and pace."
+            description="Browse our featured packages. Every journey is tailored to your dates, budget and pace."
           />
         </Reveal>
       </div>

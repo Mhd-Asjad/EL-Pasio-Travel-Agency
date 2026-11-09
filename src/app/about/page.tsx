@@ -199,15 +199,7 @@ export default function AboutPage() {
               <h2 className="mt-3 text-3xl md:text-4xl font-light text-cream">
                 We Welcome You to Our Office
               </h2>
-              <div
-                aria-hidden="true"
-                className="mx-auto mt-4 flex items-center justify-center gap-2"
-              >
-                <div className="h-px w-10 bg-gradient-to-r from-transparent to-gold-400/60" />
-                <div className="size-1.5 rounded-full bg-gold-400 shadow-[0_0_8px_rgba(242,207,120,0.6)]" />
-                <div className="h-px w-10 bg-gradient-to-l from-transparent to-gold-400/60" />
-              </div>
-              <p className="mx-auto mt-4 text-cream/70 text-base max-w-lg">
+              <p className="mx-auto mt-5 text-cream/70 text-base max-w-lg">
                 Drop in for a warm conversation about your next journey or reach out directly via phone or WhatsApp.
               </p>
 
