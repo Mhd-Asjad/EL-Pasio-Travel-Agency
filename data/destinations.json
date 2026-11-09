@@ -1,0 +1,224 @@
+{
+  "destinations": [
+    {
+      "id": "munnar",
+      "title": "Munnar",
+      "region": "Kerala, India",
+      "alt": "Misty tea plantation hills at sunrise in Munnar",
+      "src": "/images/destinations/munnar.jpg",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "categoryId": "kerala"
+    },
+    {
+      "id": "maldives",
+      "title": "Maldives",
+      "region": "Indian Ocean",
+      "alt": "Overwater villas on a jetty over turquoise Maldivian water at sunset",
+      "src": "/images/destinations/maldives.jpg",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "categoryId": "international"
+    },
+    {
+      "id": "kerala",
+      "title": "Kerala Backwaters",
+      "region": "Alleppey, India",
+      "alt": "A wooden houseboat on the Kerala backwaters at golden hour",
+      "src": "/images/destinations/kerala.jpg",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "categoryId": "kerala"
+    },
+    {
+      "id": "dubai",
+      "title": "Dubai",
+      "region": "UAE",
+      "alt": "Dubai skyline with the Burj Khalifa above a glowing resort pool at dusk",
+      "src": "/images/destinations/dubai.jpg",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "categoryId": "international"
+    },
+    {
+      "id": "bali",
+      "title": "Bali",
+      "region": "Indonesia",
+      "alt": "A tiered Balinese temple beside a lotus pond at sunset",
+      "src": "/images/destinations/bali.jpg",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "categoryId": "international"
+    },
+    {
+      "id": "chennai",
+      "title": "chennai",
+      "region": "thurthiyad, INDIA",
+      "alt": "chennai image",
+      "src": "/images/admin/1794035304930-Screenshot-2026-11-02-085612.png",
+      "createdAt": "2026-11-07T07:08:24.936Z",
+      "categoryId": "domestic"
+    }
+  ],
+  "packages": [
+    {
+      "id": "kerala-pkg",
+      "destinationId": "kerala",
+      "label": "Kerala",
+      "region": "Alleppey, India",
+      "lead": "Kerala",
+      "accent": "Backwaters",
+      "blurb": "Drift through palm-lined canals on a private houseboat, with home-cooked Kerala meals and slow golden sunsets.",
+      "highlights": [
+        "Private houseboat",
+        "Village canoe ride",
+        "Kerala meals onboard",
+        "Sunset cruise"
+      ],
+      "src": "/images/destinations/kerala.jpg",
+      "alt": "A wooden houseboat on the Kerala backwaters at golden hour",
+      "bg": "var(--navy-950)",
+      "tone": "dark",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "images": [
+        "/images/destinations/kerala.jpg"
+      ],
+      "featured": true
+    },
+    {
+      "id": "munnar-pkg",
+      "destinationId": "munnar",
+      "label": "Munnar",
+      "region": "Kerala, India",
+      "lead": "Misty",
+      "accent": "Munnar",
+      "blurb": "Wake above the clouds in tea country. Walk the plantations, chase waterfalls and unwind in a hill-view resort.",
+      "highlights": [
+        "Tea plantation walks",
+        "Hill-view resort",
+        "Waterfalls & viewpoints",
+        "Spice garden visit"
+      ],
+      "src": "/images/destinations/munnar.jpg",
+      "alt": "Misty tea plantation hills at sunrise in Munnar",
+      "bg": "var(--gold-400)",
+      "tone": "light",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "images": [
+        "/images/destinations/munnar.jpg"
+      ],
+      "featured": true
+    },
+    {
+      "id": "maldives-pkg",
+      "destinationId": "maldives",
+      "label": "Maldives",
+      "region": "Indian Ocean",
+      "lead": "Barefoot",
+      "accent": "Maldives",
+      "blurb": "Overwater villas, glassy lagoons and nothing on the schedule. We handle the flights, transfers and the resort.",
+      "highlights": [
+        "Overwater villa",
+        "Snorkelling & diving",
+        "Island transfers",
+        "Sunset dolphin cruise"
+      ],
+      "src": "/images/destinations/maldives.jpg",
+      "alt": "Overwater villas on a jetty over turquoise Maldivian water at sunset",
+      "bg": "var(--navy-700)",
+      "tone": "dark",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "images": [
+        "/images/destinations/maldives.jpg"
+      ],
+      "featured": false
+    },
+    {
+      "id": "dubai-pkg",
+      "destinationId": "dubai",
+      "label": "Dubai",
+      "region": "UAE",
+      "lead": "Skyline",
+      "accent": "Dubai",
+      "blurb": "Tower-top views by day, desert dunes by dusk. A city break packed with the best of Dubai, minus the hassle.",
+      "highlights": [
+        "Desert safari",
+        "Burj Khalifa views",
+        "Marina dhow dinner",
+        "City & souk tour"
+      ],
+      "src": "/images/destinations/dubai.jpg",
+      "alt": "Dubai skyline with the Burj Khalifa above a glowing resort pool at dusk",
+      "bg": "var(--gold-400)",
+      "tone": "light",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "images": [
+        "/images/destinations/dubai.jpg"
+      ],
+      "featured": true
+    },
+    {
+      "id": "bali-pkg",
+      "destinationId": "bali",
+      "label": "Bali",
+      "region": "Indonesia",
+      "lead": "Sacred",
+      "accent": "Bali",
+      "blurb": "Sea temples, rice terraces and jungle villas. A slower, greener escape with the right guides and the right stays.",
+      "highlights": [
+        "Temple & terrace tour",
+        "Ubud villa stay",
+        "Mount Batur sunrise",
+        "Beach club afternoons"
+      ],
+      "src": "/images/destinations/bali.jpg",
+      "alt": "A tiered Balinese temple beside a lotus pond at sunset",
+      "bg": "var(--navy-950)",
+      "tone": "dark",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "images": [
+        "/images/destinations/bali.jpg"
+      ],
+      "featured": true
+    },
+    {
+      "id": "cannada-pkg-1794034139287",
+      "destinationId": "maldives",
+      "label": "cannada",
+      "region": "cannada australia",
+      "lead": "maldives back",
+      "accent": "waters",
+      "blurb": "fasdfs",
+      "highlights": [
+        "fish",
+        "boat"
+      ],
+      "src": "/images/admin/1794034139278-Screenshot-2026-11-01-151624.png",
+      "alt": "maldives back waters",
+      "bg": "var(--navy-700)",
+      "tone": "light",
+      "createdAt": "2026-11-07T06:48:59.287Z",
+      "images": [
+        "/images/admin/1794034139278-Screenshot-2026-11-01-151624.png"
+      ],
+      "featured": true
+    }
+  ],
+  "categories": [
+    {
+      "id": "kerala",
+      "name": "Kerala",
+      "slug": "kerala"
+    },
+    {
+      "id": "international",
+      "name": "International",
+      "slug": "international"
+    },
+    {
+      "id": "domestic",
+      "name": "Domestic",
+      "slug": "domestic"
+    },
+    {
+      "id": "honeymoon",
+      "name": "Honeymoon",
+      "slug": "honeymoon"
+    }
+  ]
+}

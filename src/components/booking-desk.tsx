@@ -12,18 +12,15 @@ import {
 } from "react";
 import { CONTACT, whatsappUrl } from "@/lib/contact";
 import {
-  BusIcon,
   CompassIcon,
   HotelIcon,
   MapPinIcon,
   PlaneIcon,
   SuitcaseIcon,
-  TrainIcon,
 } from "./icons";
 import { Button, focusRingLight } from "./ui";
 
 type Kind = "packages" | "stay" | "tickets" | "plan";
-type Ticket = "flight" | "train" | "bus";
 
 type Choice = {
   id: string;
@@ -57,9 +54,9 @@ const KINDS: (Choice & { id: Kind })[] = [
   {
     id: "tickets",
     label: "Tickets",
-    aria: "Flight, train and bus tickets",
-    interest: "tickets",
-    action: "Find tickets",
+    aria: "Flight tickets",
+    interest: "flight tickets",
+    action: "Find flights",
     placeholder: "Calicut to Dubai",
     Icon: PlaneIcon,
   },
@@ -71,36 +68,6 @@ const KINDS: (Choice & { id: Kind })[] = [
     action: "Plan this trip",
     placeholder: "Where should we begin?",
     Icon: CompassIcon,
-  },
-];
-
-const TICKETS: (Choice & { id: Ticket })[] = [
-  {
-    id: "flight",
-    label: "Flight",
-    aria: "Flight tickets",
-    interest: "flight tickets",
-    action: "Find flights",
-    placeholder: "Calicut to Dubai",
-    Icon: PlaneIcon,
-  },
-  {
-    id: "train",
-    label: "Train",
-    aria: "Train tickets",
-    interest: "train tickets",
-    action: "Find trains",
-    placeholder: "Calicut to Ernakulam",
-    Icon: TrainIcon,
-  },
-  {
-    id: "bus",
-    label: "Bus",
-    aria: "Bus tickets",
-    interest: "bus tickets",
-    action: "Find buses",
-    placeholder: "Calicut to Bangalore",
-    Icon: BusIcon,
   },
 ];
 
@@ -117,9 +84,9 @@ function digits(value: string) {
 }
 
 /**
- * Compact booking card: four services up front, flight / train / bus under
- * Tickets, then a short enquiry (destination, date, travellers) that opens
- * into name, WhatsApp and email before sending.
+ * Compact booking card: four services up front, then a short enquiry
+ * (destination, date, travellers) that opens into name, WhatsApp and email
+ * before sending. Tickets is flights only.
  */
 export function BookingDesk() {
   const formId = useId();
@@ -127,7 +94,6 @@ export function BookingDesk() {
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   const [kind, setKind] = useState<Kind>("stay");
-  const [ticket, setTicket] = useState<Ticket>("flight");
   const [step, setStep] = useState<1 | 2>(1);
   const [destination, setDestination] = useState("");
   const [date, setDate] = useState("");
@@ -140,9 +106,7 @@ export function BookingDesk() {
   const [status, setStatus] = useState<"idle" | "ready" | "blocked">("idle");
   const [whatsappHref, setWhatsappHref] = useState("");
 
-  const current = KINDS.find((k) => k.id === kind) ?? KINDS[0];
-  const ticketChoice = TICKETS.find((t) => t.id === ticket) ?? TICKETS[0];
-  const active = kind === "tickets" ? ticketChoice : current;
+  const active = KINDS.find((k) => k.id === kind) ?? KINDS[0];
 
   function selectKind(id: Kind, index: number) {
     setKind(id);
@@ -251,38 +215,6 @@ export function BookingDesk() {
           );
         })}
       </div>
-
-      {kind === "tickets" ? (
-        <div
-          role="radiogroup"
-          aria-label="Ticket type"
-          className="mt-2 flex gap-1.5"
-        >
-          {TICKETS.map((item) => {
-            const selected = item.id === ticket;
-            return (
-              <button
-                key={item.id}
-                type="button"
-                role="radio"
-                aria-checked={selected}
-                onClick={() => {
-                  setTicket(item.id);
-                  setErrors({});
-                }}
-                className={`inline-flex min-h-10 flex-1 items-center justify-center gap-1.5 rounded-full text-[0.72rem] font-semibold tracking-[0.04em] ${
-                  selected
-                    ? "bg-navy-950 text-cream"
-                    : "text-navy-900/70 hover:bg-navy-950/5"
-                } ${focusRingLight}`}
-              >
-                <item.Icon className="size-3.5" />
-                {item.label}
-              </button>
-            );
-          })}
-        </div>
-      ) : null}
 
       <form id="inquiry" noValidate onSubmit={onSubmit} className="mt-3">
         <div

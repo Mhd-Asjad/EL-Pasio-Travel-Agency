@@ -8,11 +8,12 @@ import { focusRing } from "./ui";
 import { CONTACT } from "@/lib/contact";
 
 const NAV = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Packages", href: "#packages" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "Destinations", href: "/#destinations" },
+  { label: "Packages", href: "/#packages" },
+  { label: "Services", href: "/services" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export function SiteHeader() {
@@ -36,7 +37,7 @@ export function SiteHeader() {
     <header className="absolute inset-x-0 top-0 z-50">
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-5 py-5 md:px-10 md:py-7">
         <a
-          href="#home"
+          href="/"
           aria-label="EL PASEO Tours & Travels, home"
           className={`flex items-center gap-3 ${focusRing}`}
         >

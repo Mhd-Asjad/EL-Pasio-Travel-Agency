@@ -3,7 +3,7 @@ import {
   TestimonialCarousel,
   type Testimonial,
 } from "./testimonial-carousel";
-import { Eyebrow, bodyClass } from "./ui";
+import { SectionHeader } from "./section-header";
 
 // Sample reviews for the design. Replace with real customer feedback
 // (with permission) before launch.
@@ -85,25 +85,19 @@ export function Testimonials() {
         <div className="absolute left-1/2 top-[55%] h-[22rem] w-[36rem] max-w-none -translate-x-1/2 bg-[radial-gradient(closest-side,oklch(0.73_0.125_80/0.08),transparent)]" />
       </Parallax>
 
-      <div className="relative py-14 md:py-16">
+      <div className="relative py-16 md:py-24">
         <div className="mx-auto flex max-w-[1400px] flex-col items-center px-5 text-center md:px-10">
           <Reveal>
-            <Eyebrow className="!text-xl !font-semibold !tracking-[0.4em] md:!text-3xl md:!tracking-[0.45em]">Travellers Say</Eyebrow>
-          </Reveal>
-
-          <h2 id="testimonials-title" className="sr-only">They came back with stories</h2>
-
-          <Reveal className="mt-8">
-            <p
-              className={`max-w-[52ch] text-pretty text-[1rem] font-normal leading-[1.8] md:text-[1.15rem] ${bodyClass}`}
-            >
-              From first trips to many trips, here is what our travellers say
-              about planning with us.
-            </p>
+            <SectionHeader
+              eyebrow="Traveller Stories"
+              title="What Our Travellers Say"
+              id="testimonials-title"
+              description="From first trips to cherished traditions, here is what our travellers say about journeying with us."
+            />
           </Reveal>
         </div>
 
-        <Reveal className="mt-10 md:mt-14" y={48}>
+        <Reveal className="mt-12 md:mt-16" y={48}>
           <TestimonialCarousel items={ITEMS} />
         </Reveal>
       </div>

@@ -33,11 +33,12 @@ function social(label: string, url?: string): FooterLink {
 }
 
 const EXPLORE: FooterLink[] = [
-  { label: "Home", href: "#home" },
-  { label: "About us", href: "#about" },
-  { label: "Destinations", href: "#destinations" },
-  { label: "Packages", href: "#packages" },
-  { label: "Traveller stories", href: "#testimonials" },
+  { label: "Home", href: "/" },
+  { label: "Destinations", href: "/#destinations" },
+  { label: "Packages", href: "/#packages" },
+  { label: "Services", href: "/services" },
+  { label: "About Us", href: "/about" },
+  { label: "Traveller Stories", href: "/#testimonials" },
 ];
 
 const CONTACT_LINKS: FooterLink[] = [

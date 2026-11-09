@@ -1,8 +1,7 @@
 import { Parallax, Reveal } from "./motion";
-import { Eyebrow, bodyClass } from "./ui";
+import { SectionHeader } from "./section-header";
 
 // Approved copy from doc/prd.md section 7.1. Use exactly as written.
-// Split only so the motto can be styled; joined, it is the original text.
 const COPY_BEFORE =
   'At EL PASEO Tours & Travels, based in Mankavu, Calicut, we believe that travel is more than just reaching a location—it\'s about the journey. Guided by our motto, "';
 const COPY_MOTTO = "Journey Beyond Destinations,";
@@ -31,23 +30,20 @@ export function About() {
         <div className="absolute left-1/2 top-[30%] h-[22rem] w-[30rem] max-w-none -translate-x-1/2 bg-[radial-gradient(closest-side,oklch(0.73_0.125_80/0.1),transparent)]" />
       </Parallax>
 
-      <div className="relative mx-auto flex max-w-[1400px] flex-col items-center px-5 py-8 text-center md:px-10 md:py-14">
+      <div className="relative mx-auto flex max-w-[1400px] flex-col items-center px-5 py-16 text-center md:px-10 md:py-24">
         <Reveal>
-          <Eyebrow className="!text-xl !font-semibold !tracking-[0.4em] md:!text-3xl md:!tracking-[0.45em]">About Us</Eyebrow>
-        </Reveal>
-
-        <h2 id="about-title" className="sr-only">Journey Beyond Destinations</h2>
-
-        <Reveal className="mt-10 md:mt-12">
-          <p
-            className={`max-w-[56ch] text-pretty text-[1.05rem] font-normal leading-[1.85] md:text-[1.25rem] md:leading-[1.9] ${bodyClass}`}
-          >
-            {COPY_BEFORE}
-            <span className="font-display text-[1.14em] font-normal italic leading-[0] text-gold-300">
-              {COPY_MOTTO}
-            </span>
-            {COPY_AFTER}
-          </p>
+          <SectionHeader
+            eyebrow="About Us"
+            title="Journey Beyond Destinations"
+            id="about-title"
+            description={
+              <span>
+                {COPY_BEFORE}
+                <strong className="font-medium text-cream">{COPY_MOTTO}</strong>
+                {COPY_AFTER}
+              </span>
+            }
+          />
         </Reveal>
 
         <ul
