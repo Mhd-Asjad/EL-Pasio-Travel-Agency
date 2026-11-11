@@ -20,7 +20,8 @@ Full-bleed booking stage: the hero photo runs edge to edge. Headline left, compa
 - Headline: `font-light`, `tracking-[-0.035em]`, `leading-[1.02]`. The hero title is one line: “Explore, Dream, Discover”. Dream stays the italic gold word. The size scales so the line fits the column.
 - Eyebrows / labels: uppercase, `font-semibold`, `tracking-[0.3em–0.42em]`, small (0.62–0.75rem), under 4 words
 - Wordmark: `EL PASEO` semibold `tracking-[0.32em]`; `TOURS & TRAVELS` 0.56rem `tracking-[0.34em]` gold
-- Rule: serif is used for one accent word or mobile-menu links only, never for body
+- Rule: serif is used for one accent word only, never for body or nav
+- Mobile menu: compact right-aligned dropdown (not full-screen), Montserrat same as desktop nav, hamburger stays as menu icon (no close button)
 
 Banned: Inter, Roboto, Arial, system-ui.
 

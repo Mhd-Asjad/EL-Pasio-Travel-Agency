@@ -1,5 +1,6 @@
 'use server';
 
+import { put } from '@vercel/blob';
 import { promises as fs } from 'fs';
 import path from 'path';
 import { revalidatePath } from 'next/cache';
@@ -23,10 +24,27 @@ type ActionResult = { success: boolean; error?: string };
 
 // ─── Image upload helper ───────────────────────────────────────────────────────
 
+/**
+ * Store uploads in Vercel Blob on production (Vercel has a read-only
+ * filesystem). Fall back to public/images/admin only for local development.
+ */
 async function saveImage(file: File): Promise<string> {
+  const safeName = file.name.replace(/[^\w.\-]+/g, '-').toLowerCase();
+  const pathname = `admin/${Date.now()}-${safeName}`;
+
+  // Prefer Blob whenever a token or Vercel runtime is available.
+  if (process.env.BLOB_READ_WRITE_TOKEN || process.env.VERCEL) {
+    const blob = await put(pathname, file, {
+      access: 'public',
+      addRandomSuffix: true,
+      contentType: file.type || undefined,
+    });
+    return blob.url;
+  }
+
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
-  const filename = `${Date.now()}-${file.name.replace(/\s+/g, '-')}`;
+  const filename = `${Date.now()}-${safeName}`;
   const uploadDir = path.join(process.cwd(), 'public', 'images', 'admin');
   await fs.mkdir(uploadDir, { recursive: true });
   await fs.writeFile(path.join(uploadDir, filename), buffer);

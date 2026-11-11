@@ -126,7 +126,7 @@
       "images": [
         "/images/destinations/maldives.jpg"
       ],
-      "featured": true
+      "featured": false
     },
     {
       "id": "dubai-pkg",
@@ -202,7 +202,7 @@
         "/images/destinations/bali.jpg",
         "/images/destinations/munnar.jpg"
       ],
-      "featured": true
+      "featured": false
     },
     {
       "id": "bali-seminyak-nights",

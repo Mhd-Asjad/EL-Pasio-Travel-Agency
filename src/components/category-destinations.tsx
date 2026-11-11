@@ -48,19 +48,27 @@ export function CategoryDestinations({
   }, [destinations]);
 
   const tabs: CategoryTab[] = useMemo(
-    () => [
-      { id: "all", label: "All", count: destinations.length },
-      ...categories.map((cat) => ({
-        id: cat.id,
-        label: cat.name,
-        count: categoryCounts.get(cat.id) ?? 0,
-      })),
-    ],
-    [categories, categoryCounts, destinations.length],
+    () =>
+      categories
+        .map((cat) => ({
+          id: cat.id,
+          label: cat.name,
+          count: categoryCounts.get(cat.id) ?? 0,
+        }))
+        .filter((tab) => tab.count > 0),
+    [categories, categoryCounts],
   );
 
-  const [activeId, setActiveId] = useState(tabs[0]?.id ?? "all");
+  const [activeId, setActiveId] = useState(tabs[0]?.id ?? "");
   const [windowStart, setWindowStart] = useState(0);
+
+  useEffect(() => {
+    if (tabs.length === 0) return;
+    if (!tabs.some((tab) => tab.id === activeId)) {
+      setActiveId(tabs[0].id);
+      setWindowStart(0);
+    }
+  }, [activeId, tabs]);
 
   const activeIndex = Math.max(
     0,
@@ -123,7 +131,6 @@ export function CategoryDestinations({
   const canShiftForward = windowStart < maxStart;
 
   const filtered = useMemo(() => {
-    if (activeId === "all") return destinations;
     const active = categories.find((c) => c.id === activeId);
     return destinations.filter(
       (d) =>

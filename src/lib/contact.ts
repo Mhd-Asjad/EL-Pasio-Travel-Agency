@@ -7,7 +7,7 @@ export const CONTACT = {
   phoneTel: "+919074926319",
   /** International format without "+", as wa.me expects. */
   whatsappNumber: "919074926319",
-  email: "mddparis@gmail.com",
+  email: "elpaseoin@gmail.com",
   address: "Mankavu, Calicut (Kozhikode), Kerala, India",
   mapsUrl:
     "https://www.google.com/maps/search/?api=1&query=Mankavu%2C%20Calicut%2C%20Kerala",

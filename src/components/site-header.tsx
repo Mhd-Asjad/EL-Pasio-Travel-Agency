@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
+import { useEffect, useRef, useState } from "react";
 import { LogoBadge, Wordmark } from "./brand-mark";
-import { CloseIcon, MenuIcon, PhoneIcon } from "./icons";
+import { MenuIcon, PhoneIcon } from "./icons";
 import { focusRing } from "./ui";
 import { CONTACT } from "@/lib/contact";
 
@@ -18,18 +17,29 @@ const NAV = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!open) return;
+
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
+
+    const onPointer = (e: MouseEvent | TouchEvent) => {
+      const target = e.target as Node;
+      if (menuRef.current && !menuRef.current.contains(target)) {
+        setOpen(false);
+      }
+    };
+
     document.addEventListener("keydown", onKey);
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    document.addEventListener("mousedown", onPointer);
+    document.addEventListener("touchstart", onPointer);
     return () => {
       document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = prev;
+      document.removeEventListener("mousedown", onPointer);
+      document.removeEventListener("touchstart", onPointer);
     };
   }, [open]);
 
@@ -65,47 +75,51 @@ export function SiteHeader() {
           </a>
         </nav>
 
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          aria-label={open ? "Close menu" : "Open menu"}
-          className={`relative z-40 -mr-2 grid size-11 place-items-center rounded-full text-cream lg:hidden ${focusRing}`}
-        >
-          {open ? <CloseIcon /> : <MenuIcon />}
-        </button>
-      </div>
+        <div ref={menuRef} className="relative z-40 lg:hidden">
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? "Close menu" : "Open menu"}
+            className={`-mr-2 grid size-11 place-items-center rounded-full text-cream ${focusRing}`}
+          >
+            <MenuIcon />
+          </button>
 
-      {open
-        ? createPortal(
+          {open ? (
             <div
               id="mobile-menu"
-              className="fixed inset-0 z-40 flex min-h-[100dvh] flex-col justify-between bg-navy-950/96 px-5 pb-10 pt-28 backdrop-blur-md lg:hidden"
+              role="dialog"
+              aria-label="Menu"
+              className="absolute right-0 top-[calc(100%+0.5rem)] w-[min(15.5rem,calc(100vw-2.5rem))] overflow-hidden rounded-2xl border border-cream/20 bg-cream/[0.08] shadow-[0_18px_50px_-18px_oklch(0.2_0.055_258/0.7),inset_0_1px_0_oklch(0.975_0.012_88/0.18)] backdrop-blur-xl backdrop-saturate-150"
             >
-              <nav aria-label="Mobile" className="flex flex-col">
+              <nav aria-label="Mobile" className="flex flex-col p-2">
                 {NAV.map((item) => (
                   <a
                     key={item.href}
                     href={item.href}
                     onClick={() => setOpen(false)}
-                    className={`border-b border-cream/10 py-4 font-display text-4xl italic text-cream ${focusRing}`}
+                    className={`rounded-xl px-3.5 py-2.5 text-[0.8rem] font-medium tracking-[0.06em] text-cream/90 transition-colors hover:bg-cream/12 hover:text-cream ${focusRing}`}
                   >
                     {item.label}
                   </a>
                 ))}
               </nav>
-              <a
-                href={`tel:${CONTACT.phoneTel}`}
-                className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gold-400 px-6 text-sm font-semibold tracking-wide text-navy-950 ${focusRing}`}
-              >
-                <PhoneIcon className="size-4" />
-                Call {CONTACT.phoneDisplay}
-              </a>
-            </div>,
-            document.body,
-          )
-        : null}
+              <div className="border-t border-cream/15 p-2">
+                <a
+                  href={`tel:${CONTACT.phoneTel}`}
+                  onClick={() => setOpen(false)}
+                  className={`inline-flex w-full min-h-10 items-center justify-center gap-2 rounded-xl bg-gold-400/90 px-3 text-[0.75rem] font-semibold tracking-[0.04em] text-navy-950 shadow-[inset_0_1px_0_oklch(0.975_0.012_88/0.25)] backdrop-blur-sm ${focusRing}`}
+                >
+                  <PhoneIcon className="size-3.5" />
+                  {CONTACT.phoneDisplay}
+                </a>
+              </div>
+            </div>
+          ) : null}
+        </div>
+      </div>
     </header>
   );
 }
