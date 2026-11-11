@@ -193,7 +193,10 @@ export default function ServicesPage() {
 
                 return (
                   <Reveal key={service.id} delay={i * 0.1}>
-                    <div className="flex h-full flex-col justify-between rounded-3xl border border-cream/10 bg-navy-950 p-8 md:p-10 transition-all duration-300 hover:border-gold-400/50 hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)]">
+                    <div
+                      id={service.id}
+                      className="flex h-full scroll-mt-28 flex-col justify-between rounded-3xl border border-cream/10 bg-navy-950 p-8 md:p-10 transition-all duration-300 hover:border-gold-400/50 hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)]"
+                    >
                       <div>
                         <div className="flex items-center justify-between">
                           <div className="inline-flex size-14 items-center justify-center rounded-2xl bg-gold-400/10 border border-gold-400/25 text-gold-400">
@@ -240,7 +243,10 @@ export default function ServicesPage() {
         </section>
 
         {/* Specialized Journeys */}
-        <section className="border-t border-cream/10 py-20 md:py-28">
+        <section
+          id="specialized"
+          className="scroll-mt-28 border-t border-cream/10 py-20 md:py-28"
+        >
           <div className="mx-auto max-w-[1400px] px-5 md:px-10">
             <Reveal>
               <SectionHeader

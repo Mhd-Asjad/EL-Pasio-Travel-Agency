@@ -82,6 +82,8 @@ export function PackageForm({ package: pkg, destinations }: Props) {
     const urls = fileList.map((f) => URL.createObjectURL(f));
     setNewFiles((prev) => [...prev, ...fileList]);
     setNewFileUrls((prev) => [...prev, ...urls]);
+    // Allow picking the same file again and keep accumulating across picks.
+    e.target.value = "";
   }
 
   function removeExisting(i: number) {
@@ -96,24 +98,34 @@ export function PackageForm({ package: pkg, destinations }: Props) {
     if (previewIndex >= allImages.length - 1) setPreviewIndex(0);
   }
 
+  // Native <input type="file"> only keeps the last picker selection. Previews
+  // accumulate in React state, so rebuild FormData from that list on submit.
+  function submitWithAllImages(formData: FormData) {
+    formData.delete("images");
+    formData.delete("image");
+    for (const file of newFiles) {
+      formData.append("images", file);
+    }
+    formAction(formData);
+  }
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       {/* ── Left Column: Clean Form ── */}
       <div className="lg:col-span-7 bg-navy-900 rounded-2xl border border-cream/10 p-6 sm:p-7">
-        <form action={formAction} className="space-y-6">
+        <form action={submitWithAllImages} className="space-y-6">
           {state?.error && (
             <div className="rounded-lg border border-red-800 bg-red-900/30 px-4 py-2.5 text-xs text-red-300">
               {state.error}
             </div>
           )}
 
-          {isEdit && (
-            <input
-              type="hidden"
-              name="existingImages"
-              value={JSON.stringify(existingImages)}
-            />
-          )}
+          {/* Always send retained paths so create/edit keep previously saved images. */}
+          <input
+            type="hidden"
+            name="existingImages"
+            value={JSON.stringify(existingImages)}
+          />
 
           {/* Destination */}
           <div>
@@ -196,7 +208,6 @@ export function PackageForm({ package: pkg, destinations }: Props) {
               <input
                 ref={fileInputRef}
                 type="file"
-                name="images"
                 multiple
                 accept="image/*"
                 onChange={handleFiles}

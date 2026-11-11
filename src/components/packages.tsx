@@ -1,12 +1,11 @@
 import { getPackages } from "@/lib/db";
-import { whatsappUrl } from "@/lib/contact";
 import { PackageSlider, type TravelPackage } from "./package-slider";
 import { Reveal } from "./motion";
 import { SectionHeader } from "./section-header";
 
 export async function Packages() {
   const allPackages = await getPackages();
-  
+
   // Filter for packages explicitly featured (or default to all if featured flag isn't set)
   const featured = allPackages.filter((p) => p.featured !== false);
   const displayPackages = featured.length > 0 ? featured : allPackages.slice(0, 5);
@@ -31,9 +30,7 @@ export async function Packages() {
       alt: p.alt || `${title} travel package`,
       bg: p.bg || "var(--navy-950)",
       tone: p.tone || "dark",
-      href: whatsappUrl(
-        `Hello EL PASEO Tours & Travels, I would like to know more about the ${title} package.`
-      ),
+      href: `/destinations/${p.destinationId}?package=${encodeURIComponent(p.id)}`,
     };
   });
 

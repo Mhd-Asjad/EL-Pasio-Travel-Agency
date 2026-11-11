@@ -12,6 +12,7 @@ export const instant = false;
 
 type Props = {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ package?: string | string[] }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -28,8 +29,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function DestinationPage({ params }: Props) {
+export default async function DestinationPage({ params, searchParams }: Props) {
   const { id } = await params;
+  const query = await searchParams;
   const destination = await getDestination(id);
   if (!destination) notFound();
 
@@ -43,6 +45,10 @@ export default async function DestinationPage({ params }: Props) {
   const moreDestinations = allDestinations
     .filter((d) => d.id !== destination.id)
     .slice(0, 3);
+  const packageParam = query.package;
+  const initialPackageId = Array.isArray(packageParam)
+    ? packageParam[0]
+    : packageParam;
 
   return (
     <SmoothScroll>
@@ -51,6 +57,7 @@ export default async function DestinationPage({ params }: Props) {
           destination={destination}
           packages={packages}
           moreDestinations={moreDestinations}
+          initialPackageId={initialPackageId}
         />
       </main>
     </SmoothScroll>

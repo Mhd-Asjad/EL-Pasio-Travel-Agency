@@ -107,7 +107,6 @@ export function PackageSlider({ packages }: { packages: TravelPackage[] }) {
                 <div className="mt-8">
                   <ButtonLink
                     href={pkg.href}
-                    external
                     arrow
                     variant={pkg.tone === "dark" ? "primary" : "ghost"}
                     tone={pkg.tone === "dark" ? "dark" : "light"}

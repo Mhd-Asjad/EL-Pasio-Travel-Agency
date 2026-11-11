@@ -209,24 +209,34 @@ export async function createPackage(_prevState: ActionResult | null, formData: F
       }
     }
 
-    // Process multiple uploaded brochure/package images
+    // Retained paths (usually empty on create) + newly uploaded files.
+    let retainedImages: string[] = [];
+    const existingRaw = formData.get('existingImages');
+    if (typeof existingRaw === 'string' && existingRaw) {
+      try {
+        retainedImages = JSON.parse(existingRaw);
+      } catch {
+        retainedImages = [];
+      }
+    }
+
     const rawFiles = formData.getAll('images');
-    const images: string[] = [];
+    const uploaded: string[] = [];
 
     for (const item of rawFiles) {
       if (item instanceof File && item.size > 0) {
         const savedPath = await saveImage(item);
-        images.push(savedPath);
+        uploaded.push(savedPath);
       }
     }
 
-    // Check single image fallback if 'image' was used
     const singleFile = formData.get('image');
     if (singleFile instanceof File && singleFile.size > 0) {
       const savedPath = await saveImage(singleFile);
-      images.push(savedPath);
+      uploaded.push(savedPath);
     }
 
+    const images = [...retainedImages, ...uploaded];
     if (images.length === 0) {
       return { success: false, error: 'Please upload at least one brochure or package image.' };
     }
@@ -255,6 +265,7 @@ export async function createPackage(_prevState: ActionResult | null, formData: F
     await savePackages([...packages, newPkg]);
     revalidatePath('/');
     revalidatePath('/admin/packages');
+    revalidatePath(`/destinations/${destinationId}`);
   } catch (err) {
     return { success: false, error: String(err) };
   }
@@ -352,6 +363,7 @@ export async function updatePackage(id: string, _prevState: ActionResult | null,
     await savePackages(packages);
     revalidatePath('/');
     revalidatePath('/admin/packages');
+    revalidatePath(`/destinations/${destinationId}`);
   } catch (err) {
     return { success: false, error: String(err) };
   }

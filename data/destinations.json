@@ -78,7 +78,7 @@
       "images": [
         "/images/destinations/kerala.jpg"
       ],
-      "featured": true
+      "featured": false
     },
     {
       "id": "munnar-pkg",
@@ -126,7 +126,7 @@
       "images": [
         "/images/destinations/maldives.jpg"
       ],
-      "featured": false
+      "featured": true
     },
     {
       "id": "dubai-pkg",
@@ -150,7 +150,7 @@
       "images": [
         "/images/destinations/dubai.jpg"
       ],
-      "featured": true
+      "featured": false
     },
     {
       "id": "bali-pkg",
@@ -172,9 +172,89 @@
       "tone": "dark",
       "createdAt": "2024-01-01T00:00:00.000Z",
       "images": [
+        "/images/destinations/bali.jpg",
+        "/images/destinations/kerala.jpg",
+        "/images/hero-mountain-lake.jpg"
+      ],
+      "featured": false
+    },
+    {
+      "id": "bali-ubud-escape",
+      "destinationId": "bali",
+      "label": "Ubud Escape",
+      "region": "Ubud, Bali",
+      "lead": "Jungle",
+      "accent": "Ubud",
+      "blurb": "Private pool villas tucked into the jungle, rice-terrace walks, and slow mornings with coffee overlooking the valley.",
+      "highlights": [
+        "Private pool villa",
+        "Tegallalang terraces",
+        "Yoga & spa day",
+        "Local cooking class"
+      ],
+      "src": "/images/destinations/kerala.jpg",
+      "alt": "Lush green hillsides reminiscent of Bali’s jungle valleys",
+      "bg": "var(--gold-400)",
+      "tone": "light",
+      "createdAt": "2026-11-10T00:00:00.000Z",
+      "images": [
+        "/images/destinations/kerala.jpg",
+        "/images/destinations/bali.jpg",
+        "/images/destinations/munnar.jpg"
+      ],
+      "featured": true
+    },
+    {
+      "id": "bali-seminyak-nights",
+      "destinationId": "bali",
+      "label": "Seminyak Nights",
+      "region": "Seminyak, Bali",
+      "lead": "Sunset",
+      "accent": "Seminyak",
+      "blurb": "Beach clubs, golden-hour dinners, and a stylish stay steps from Seminyak’s best cafés and boutiques.",
+      "highlights": [
+        "Beachfront hotel",
+        "Beach club day pass",
+        "Sunset dinner",
+        "Private airport transfers"
+      ],
+      "src": "/images/destinations/maldives.jpg",
+      "alt": "Turquoise water and a soft shoreline for a Seminyak-style beach stay",
+      "bg": "var(--navy-700)",
+      "tone": "dark",
+      "createdAt": "2026-11-10T00:00:01.000Z",
+      "images": [
+        "/images/destinations/maldives.jpg",
+        "/images/destinations/dubai.jpg",
         "/images/destinations/bali.jpg"
       ],
       "featured": true
+    },
+    {
+      "id": "bali-nusa-penida",
+      "destinationId": "bali",
+      "label": "Nusa Penida",
+      "region": "Nusa Penida, Bali",
+      "lead": "Cliffside",
+      "accent": "Penida",
+      "blurb": "Day-trip drama: sheer cliffs, secret beaches, and snorkelling clear water off Nusa Penida with a private guide.",
+      "highlights": [
+        "Fast-boat transfers",
+        "Kelingking viewpoint",
+        "Snorkel stop",
+        "Private guide & driver"
+      ],
+      "src": "/images/hero-mountain-lake.jpg",
+      "alt": "Dramatic cliffs and open water on a Nusa Penida-style day trip",
+      "bg": "var(--navy-950)",
+      "tone": "dark",
+      "createdAt": "2026-11-10T00:00:02.000Z",
+      "images": [
+        "/images/hero-mountain-lake.jpg",
+        "/images/destinations/bali.jpg",
+        "/images/destinations/maldives.jpg"
+      ],
+      "featured": false
     },
     {
       "id": "cannada-pkg-1794034139287",

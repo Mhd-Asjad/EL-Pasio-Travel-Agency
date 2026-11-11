@@ -1,34 +1,94 @@
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { whatsappUrl } from "@/lib/contact";
 import type { AdminDestination, AdminPackage } from "@/lib/db";
 import { Reveal } from "./motion";
 import { SiteHeader } from "./site-header";
 import { SiteFooter } from "./site-footer";
+import { DestinationPackages } from "./package-gallery";
 import { ButtonLink, bodyClass, headlineClass } from "./ui";
 import { SectionHeader } from "./section-header";
+
+function packageTitle(pkg: AdminPackage) {
+  return pkg.label || pkg.lead || "Package";
+}
+
+function packageCover(pkg: AdminPackage) {
+  return pkg.src || pkg.images?.[0] || "/images/hero-mountain-lake.jpg";
+}
+
+function packageHeadline(pkg: AdminPackage) {
+  const lead = (pkg.lead || packageTitle(pkg)).trim();
+  const accent = pkg.accent?.trim();
+  if (!accent || accent.toLowerCase() === lead.toLowerCase()) return lead;
+  return `${lead} ${accent}`;
+}
 
 export function DestinationDetail({
   destination,
   packages,
   moreDestinations,
+  initialPackageId,
 }: {
   destination: AdminDestination;
   packages: AdminPackage[];
   moreDestinations: AdminDestination[];
+  initialPackageId?: string;
 }) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const [selectedId, setSelectedId] = useState<string | null>(() => {
+    if (!initialPackageId) return null;
+    return packages.some((pkg) => pkg.id === initialPackageId)
+      ? initialPackageId
+      : null;
+  });
+
+  useEffect(() => {
+    if (!initialPackageId) return;
+    if (!packages.some((pkg) => pkg.id === initialPackageId)) return;
+    setSelectedId(initialPackageId);
+  }, [initialPackageId, packages]);
+
+  const selected = useMemo(
+    () => packages.find((pkg) => pkg.id === selectedId) ?? null,
+    [packages, selectedId],
+  );
+
   const planHref = whatsappUrl(
     `Hello EL PASEO Tours & Travels, I would like to plan a trip to ${destination.title}.`,
   );
-  const countLabel =
-    packages.length === 1 ? "1 package" : `${packages.length} packages`;
+
+  const heroImage = selected ? packageCover(selected) : destination.src;
+  const heroAlt = selected
+    ? selected.alt || `${packageTitle(selected)} package`
+    : destination.alt || destination.title;
+
+  function openPackage(id: string) {
+    setSelectedId(id);
+    router.replace(`${pathname}?package=${encodeURIComponent(id)}`, {
+      scroll: false,
+    });
+    // Instant scroll so a mobile ghost-click can't land on the gallery lightbox.
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }
+
+  function closePackage() {
+    setSelectedId(null);
+    router.replace(pathname, { scroll: false });
+  }
 
   return (
     <>
       <section className="relative isolate flex min-h-[78svh] flex-col overflow-hidden bg-navy-950 text-cream">
         <Image
-          src={destination.src}
-          alt={destination.alt || destination.title}
+          key={heroImage}
+          src={heroImage}
+          alt={heroAlt}
           fill
           preload
           loading="eager"
@@ -43,39 +103,71 @@ export function DestinationDetail({
         <SiteHeader />
 
         <div className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-1 flex-col justify-end px-5 pb-14 pt-32 md:px-10 md:pb-20">
-          <Reveal>
-            <div className="flex flex-wrap items-center gap-2.5">
-              {destination.categoryName && (
-                <span className="rounded-full bg-gold-400/20 border border-gold-400/30 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-gold-300">
-                  {destination.categoryName}
-                </span>
-              )}
-              {destination.region && (
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.32em] text-gold-300/90 md:text-xs md:tracking-[0.4em]">
-                  {destination.region}
+          <Reveal key={selected ? selected.id : "destination"}>
+            {selected ? (
+              <>
+                <div className="flex flex-wrap items-center gap-2.5">
+                  <span className="rounded-full border border-gold-400/30 bg-gold-400/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-gold-300">
+                    Package
+                  </span>
+                  {(selected.region || destination.region) && (
+                    <p className="text-[0.68rem] font-semibold uppercase tracking-[0.32em] text-gold-300/90 md:text-xs md:tracking-[0.4em]">
+                      {selected.region || destination.region}
+                    </p>
+                  )}
+                </div>
+                <h1
+                  className={`mt-5 max-w-[18ch] text-[clamp(2.4rem,8vw,5.5rem)] ${headlineClass}`}
+                >
+                  {packageHeadline(selected)}
+                </h1>
+                {selected.blurb ? (
+                  <p
+                    className={`mt-5 max-w-[46ch] text-[1.05rem] leading-[1.8] ${bodyClass}`}
+                  >
+                    {selected.blurb}
+                  </p>
+                ) : null}
+                {selected.highlights?.length ? (
+                  <ul className="mt-6 flex flex-wrap gap-2">
+                    {selected.highlights.map((item) => (
+                      <li
+                        key={item}
+                        className="rounded-full border border-cream/15 bg-cream/10 px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-cream/90 backdrop-blur-sm"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </>
+            ) : (
+              <>
+                <div className="flex flex-wrap items-center gap-2.5">
+                  {destination.categoryName && (
+                    <span className="rounded-full border border-gold-400/30 bg-gold-400/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-gold-300">
+                      {destination.categoryName}
+                    </span>
+                  )}
+                  {destination.region && (
+                    <p className="text-[0.68rem] font-semibold uppercase tracking-[0.32em] text-gold-300/90 md:text-xs md:tracking-[0.4em]">
+                      {destination.region}
+                    </p>
+                  )}
+                </div>
+                <h1
+                  className={`mt-5 max-w-[16ch] text-[clamp(2.6rem,10vw,6.5rem)] ${headlineClass}`}
+                >
+                  {destination.title}
+                </h1>
+                <p
+                  className={`mt-5 max-w-[42ch] text-[1.05rem] leading-[1.8] ${bodyClass}`}
+                >
+                  Handpicked stays and journeys in {destination.title}. Choose a
+                  package, or tell us your dates and we will tailor one.
                 </p>
-              )}
-            </div>
-            <h1
-              className={`mt-5 max-w-[16ch] text-[clamp(2.6rem,10vw,6.5rem)] ${headlineClass}`}
-            >
-              {destination.title}
-            </h1>
-            <p className={`mt-5 max-w-[42ch] text-[1.05rem] leading-[1.8] ${bodyClass}`}>
-              Handpicked stays and journeys in {destination.title}. Choose a
-              package, or tell us your dates and we will tailor one.
-            </p>
-            <p className="mt-4 text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-gold-300/90">
-              {packages.length > 0 ? countLabel : "Packages on request"}
-            </p>
-            <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
-              <ButtonLink href={planHref} external arrow>
-                Plan this trip
-              </ButtonLink>
-              <ButtonLink href="/#destinations" variant="ghost">
-                All destinations
-              </ButtonLink>
-            </div>
+              </>
+            )}
           </Reveal>
         </div>
       </section>
@@ -90,14 +182,20 @@ export function DestinationDetail({
         />
 
         <div className="relative mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-28">
-          <Reveal>
-            <SectionHeader
-              eyebrow="Packages"
-              title={`Journeys in ${destination.title}`}
-              id="destination-packages-title"
-              description={`Handpicked packages shaped around ${destination.title}. Every itinerary can be adjusted to your dates, budget and pace.`}
-            />
-          </Reveal>
+          {!selected ? (
+            <Reveal>
+              <SectionHeader
+                eyebrow="Packages"
+                title={`Journeys in ${destination.title}`}
+                id="destination-packages-title"
+                description={`Handpicked packages shaped around ${destination.title}. Every itinerary can be adjusted to your dates, budget and pace.`}
+              />
+            </Reveal>
+          ) : (
+            <h2 id="destination-packages-title" className="sr-only">
+              {packageHeadline(selected)} gallery
+            </h2>
+          )}
 
           {packages.length === 0 ? (
             <Reveal className="mx-auto mt-16 max-w-xl rounded-2xl border border-cream/10 bg-navy-900/70 px-8 py-16 text-center">
@@ -112,13 +210,13 @@ export function DestinationDetail({
               </div>
             </Reveal>
           ) : (
-            <ul className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
-              {packages.map((pkg, i) => (
-                <li key={pkg.id}>
-                  <PackageCard pkg={pkg} destinationTitle={destination.title} index={i} />
-                </li>
-              ))}
-            </ul>
+            <DestinationPackages
+              packages={packages}
+              destinationTitle={destination.title}
+              selectedId={selectedId}
+              onSelect={openPackage}
+              onBack={closePackage}
+            />
           )}
         </div>
       </section>
@@ -174,111 +272,5 @@ export function DestinationDetail({
 
       <SiteFooter />
     </>
-  );
-}
-
-function PackageCard({
-  pkg,
-  destinationTitle,
-  index,
-}: {
-  pkg: AdminPackage;
-  destinationTitle: string;
-  index: number;
-}) {
-  const title = pkg.label || pkg.lead || "Package";
-  const cover = pkg.src || pkg.images?.[0] || "/images/hero-mountain-lake.jpg";
-  const gallery = (pkg.images ?? []).filter((src) => src !== cover).slice(0, 3);
-  const href = whatsappUrl(
-    `Hello EL PASEO Tours & Travels, I would like to know more about the ${title} package in ${destinationTitle}.`,
-  );
-  const gold = index % 2 === 1;
-
-  return (
-    <Reveal delay={(index % 2) * 0.08}>
-      <article
-        className={`flex h-full flex-col overflow-hidden rounded-2xl border border-cream/10 ${
-          gold ? "bg-[var(--gold-400)] text-navy-950" : "bg-navy-900 text-cream"
-        }`}
-      >
-        <div className="relative aspect-[16/10] overflow-hidden">
-          <Image
-            src={cover}
-            alt={pkg.alt || `${title} package`}
-            fill
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className="object-cover"
-          />
-        </div>
-
-        {gallery.length > 0 ? (
-          <div className="grid grid-cols-3 gap-px bg-navy-950/20">
-            {gallery.map((src) => (
-              <div key={src} className="relative aspect-[4/3] overflow-hidden">
-                <Image
-                  src={src}
-                  alt=""
-                  fill
-                  sizes="20vw"
-                  className="object-cover"
-                />
-              </div>
-            ))}
-          </div>
-        ) : null}
-
-        <div className="flex flex-1 flex-col p-6 md:p-8">
-          <p
-            className={`text-[11px] font-semibold uppercase tracking-[0.26em] ${
-              gold ? "text-navy-950/60" : "text-gold-300"
-            }`}
-          >
-            {pkg.region || destinationTitle}
-          </p>
-          <h3 className="mt-2 text-[clamp(1.6rem,3vw,2.15rem)] font-light leading-[1.05] tracking-[-0.03em]">
-            {pkg.lead || title}
-            {pkg.accent ? ` ${pkg.accent}` : ""}
-          </h3>
-          {pkg.blurb ? (
-            <p
-              className={`mt-4 text-[0.98rem] leading-[1.75] ${
-                gold ? "text-navy-950/80" : "text-cream/80"
-              }`}
-            >
-              {pkg.blurb}
-            </p>
-          ) : null}
-
-          {pkg.highlights?.length ? (
-            <ul className="mt-5 flex flex-wrap gap-2">
-              {pkg.highlights.map((item) => (
-                <li
-                  key={item}
-                  className={`rounded-full px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.14em] ${
-                    gold
-                      ? "bg-navy-950/10 text-navy-950"
-                      : "bg-cream/8 text-cream/80"
-                  }`}
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
-          ) : null}
-
-          <div className="mt-8">
-            <ButtonLink
-              href={href}
-              external
-              arrow
-              variant={gold ? "ghost" : "primary"}
-              tone={gold ? "light" : "dark"}
-            >
-              Explore this package
-            </ButtonLink>
-          </div>
-        </div>
-      </article>
-    </Reveal>
   );
 }

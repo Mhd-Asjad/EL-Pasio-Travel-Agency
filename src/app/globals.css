@@ -39,7 +39,7 @@
 
   --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
 
-  --animate-marquee: marquee 38s linear infinite;
+  --animate-marquee: marquee 55s linear infinite;
   @keyframes marquee {
     from {
       transform: translate3d(0, 0, 0);
@@ -60,4 +60,17 @@ body {
 ::selection {
   background: var(--gold-400);
   color: var(--navy-950);
+}
+
+/* Hide scrollbar on hero search results; wheel/touch scroll still works. */
+.hero-search-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hero-search-scroll::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+  background: transparent;
 }
